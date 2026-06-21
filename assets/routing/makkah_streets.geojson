@@ -1,0 +1,77 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "طريق إبراهيم الخليل",
+                "highway": "primary"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.8230,
+                        21.4210
+                    ],
+                    [
+                        39.8242,
+                        21.4225
+                    ],
+                    [
+                        39.8251,
+                        21.4238
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "طريق أجياد",
+                "highway": "secondary"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.8262,
+                        21.4195
+                    ],
+                    [
+                        39.8255,
+                        21.4212
+                    ],
+                    [
+                        39.8242,
+                        21.4225
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "مسار المشاة للحرم",
+                "highway": "pedestrian"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.8251,
+                        21.4238
+                    ],
+                    [
+                        39.8262,
+                        21.4225
+                    ],
+                    [
+                        39.8275,
+                        21.4215
+                    ]
+                ]
+            }
+        }
+    ]
+}

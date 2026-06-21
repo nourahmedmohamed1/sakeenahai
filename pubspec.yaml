@@ -1,0 +1,50 @@
+name: sakeenah_ai
+description: "Sakeenah AI - Smart Assistant for Hajj"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  sensors_plus: ^5.0.1
+  flutter_tts: ^4.0.2
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.1
+  geolocator: ^10.1.0
+  shared_preferences: ^2.2.3
+
+  # استخدام إصدارات متوافقة مع محرك الخرائط
+  mbtiles: ^0.4.0
+  flutter_map_mbtiles: ^1.0.4
+
+  path_provider: ^2.1.3
+  archive: ^3.6.1
+  pedometer_2: ^5.0.4
+  flutter_compass: any
+  flutter_blue_plus: ^1.32.0
+  flutter_ble_peripheral: ^2.1.0
+  permission_handler: ^11.3.1
+  vibration: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/map_tiles/makkah_map.mbtiles
+    - assets/routing/makkah_streets.geojson
+    - assets/locations.json
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"

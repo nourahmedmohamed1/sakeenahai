@@ -1,0 +1,441 @@
+{
+    "version": 0.6,
+    "generator": "Overpass API 0.7.62.11 87bfad18",
+    "osm3s": {
+        "timestamp_osm_base": "2026-06-18T10:27:41Z",
+        "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+    },
+    "elements": [
+        {
+            "type": "node",
+            "id": 2706849553,
+            "lat": 21.4099185,
+            "lon": 39.8687185,
+            "tags": {
+                "addr:city": "مكة",
+                "addr:postcode": "24243",
+                "addr:street": "شارع العزيزية",
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "المستشفى الأهلي السعودي",
+                "name:ar": "المستشفى الأهلي السعودي",
+                "name:en": "Saudi National Hospital",
+                "name:tr": "Suudi Ulusal Hastanesi"
+            }
+        },
+        {
+            "type": "node",
+            "id": 2708673853,
+            "lat": 21.4006061,
+            "lon": 39.7842685,
+            "tags": {
+                "amenity": "hospital",
+                "emergency": "no",
+                "healthcare": "hospital",
+                "name": "مستوصف قضيب البان",
+                "name:ar": "مستوصف قضيب البان"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4406669093,
+            "lat": 21.4490959,
+            "lon": 39.8631924,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مستشفى السلام",
+                "name:ar": "مستشفى السلام",
+                "name:en": "Salam Hospital"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4406715691,
+            "lat": 21.4483515,
+            "lon": 39.8647505,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مركز صحي العدل",
+                "name:ar": "مركز صحي العدل"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4424840089,
+            "lat": 21.3848734,
+            "lon": 39.8605185,
+            "tags": {
+                "amenity": "hospital",
+                "fixme": "name, name:en mismatch.",
+                "name": "مستشفى النور",
+                "name:ar": "مستشفى النور",
+                "name:en": "al-Noor Hospital",
+                "phone": "+966 125 665 000",
+                "wikidata": "Q16125077"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4534829779,
+            "lat": 21.3992270,
+            "lon": 39.8992415,
+            "tags": {
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "Armed Forces Hospital",
+                "name:en": "Armed Forces Hospital",
+                "name:tr": "Silahlı Kuvvetler Hastanesi"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4534849994,
+            "lat": 21.3527385,
+            "lon": 39.9732195,
+            "tags": {
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "مستشفى نمرة",
+                "name:ar": "مستشفى نمرة",
+                "name:ku": "Nexweşxaneya Namîra",
+                "name:tr": "Namira Hastanesi"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4538598490,
+            "lat": 21.4005275,
+            "lon": 39.8647952,
+            "tags": {
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "Hospital Alawi Tunsie",
+                "phone": "+966 125 504 015"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4538607235,
+            "lat": 21.4038493,
+            "lon": 39.8802291,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مركز صحي العزيزية الشرقية",
+                "name:ar": "مركز صحي العزيزية الشرقية",
+                "name:en": "Health center Azizia East"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4547232393,
+            "lat": 21.5614273,
+            "lon": 39.7746446,
+            "tags": {
+                "addr:postcode": "21955",
+                "addr:street": "Al madinah al munawarah",
+                "amenity": "hospital",
+                "name:en": "Muhammad sales Basharahil hospital (648 patient )"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4646305989,
+            "lat": 21.4681906,
+            "lon": 39.9438084,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مجمع الرائد المكي المتخصص في طب الاسنان",
+                "name:ar": "مجمع الرائد المكي المتخصص في طب الاسنان"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4853503310,
+            "lat": 21.4051802,
+            "lon": 39.8884633,
+            "tags": {
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "Mina Al-Jisr Hospital",
+                "name:en": "Mina Al-Jisr Hospital"
+            }
+        },
+        {
+            "type": "node",
+            "id": 4853590821,
+            "lat": 21.4545574,
+            "lon": 39.8393304,
+            "tags": {
+                "amenity": "hospital"
+            }
+        },
+        {
+            "type": "node",
+            "id": 5070401203,
+            "lat": 21.4163884,
+            "lon": 39.8628741,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مستوصف العبير",
+                "name:ar": "مستوصف العبير"
+            }
+        },
+        {
+            "type": "node",
+            "id": 5075704816,
+            "lat": 21.4267071,
+            "lon": 39.8232661,
+            "tags": {
+                "amenity": "hospital",
+                "emergency": "yes",
+                "healthcare": "hospital",
+                "name": "مستشفى الحرم للطوارئ",
+                "name:ar": "مستشفى الحرم للطوارئ",
+                "name:en": "Al Haram Emergency Hospital",
+                "name:fr": "Hôpital des urgences Al-Haram",
+                "name:tk": "Häräm Çalt ýagdaýlar Keselhanasy",
+                "name:tr": "Harem Acil Hastanesi",
+                "name:ur": "الحرم ایمرجنسی ہسپتال"
+            }
+        },
+        {
+            "type": "node",
+            "id": 5076188152,
+            "lat": 21.4197202,
+            "lon": 39.8263838,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مستشفى أجياد للطوارئ",
+                "name:ar": "مستشفى أجياد للطوارئ",
+                "name:en": "Ajyad Emergency Hospital",
+                "name:tr": "Ajyad Acil Hastanesi",
+                "phone": "+966 12 573 0070"
+            }
+        },
+        {
+            "type": "node",
+            "id": 5076826198,
+            "lat": 21.3941412,
+            "lon": 39.8959064,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مستوصف قوى الامن",
+                "name:ar": "مستوصف قوى الامن",
+                "name:en": "Security Forces Health Center"
+            }
+        },
+        {
+            "type": "node",
+            "id": 5077299107,
+            "lat": 21.4431374,
+            "lon": 39.8355345,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مجمع الفهد الطبي",
+                "name:ar": "مجمع الفهد الطبي",
+                "name:en": "Al Fahd Medical Complex"
+            }
+        },
+        {
+            "type": "node",
+            "id": 5134884137,
+            "lat": 21.4864762,
+            "lon": 39.7892145,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مستشفى حراء",
+                "name:ar": "مستشفى حراء",
+                "name:en": "Hera General Hospital"
+            }
+        },
+        {
+            "type": "node",
+            "id": 5828839701,
+            "lat": 21.4123984,
+            "lon": 39.8618606,
+            "tags": {
+                "amenity": "hospital",
+                "name": "البعثة الطبية العراقية",
+                "name:en": "Iraqi medical delegation"
+            }
+        },
+        {
+            "type": "node",
+            "id": 6139791985,
+            "lat": 21.3889212,
+            "lon": 39.8079877,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مركز الملك عبد اللة لغسيل الكلي"
+            }
+        },
+        {
+            "type": "node",
+            "id": 6166310287,
+            "lat": 21.4182818,
+            "lon": 39.7752803,
+            "tags": {
+                "amenity": "hospital",
+                "name": "مركز الملك عبد الله لغسيل الكلي الصناعي",
+                "name:en": "King Abdullah dialysis Center"
+            }
+        },
+        {
+            "type": "node",
+            "id": 6274474323,
+            "lat": 21.4286256,
+            "lon": 39.8289968,
+            "tags": {
+                "amenity": "drinking_water",
+                "name": "زمزم",
+                "shop": "yes"
+            }
+        },
+        {
+            "type": "node",
+            "id": 6795540585,
+            "lat": 21.3970253,
+            "lon": 39.8769040,
+            "tags": {
+                "amenity": "hospital",
+                "name": "Pakistan Hajj Mission Hospital"
+            }
+        },
+        {
+            "type": "node",
+            "id": 8583386218,
+            "lat": 21.4318676,
+            "lon": 39.7921537,
+            "tags": {
+                "addr:city": "مكه",
+                "addr:housenumber": "1",
+                "addr:postcode": "24221",
+                "addr:street": "Ar Ridwa Street",
+                "amenity": "hospital",
+                "description": "مجمع مبارك الطبي هوا مجمع طبي حديث يختص بتجميل الاسنان ومعالجتها وتقويم الاسنان علي يد افضل الكوادر الطبيه من اخصائين و استشارين ذو خبره وكفائه",
+                "email": "mobarak_1990@hotmail.com",
+                "healthcare": "hospital",
+                "healthcare:speciality": "dentist",
+                "image": "https://www.google.com/maps/uv?pb=!1s0x15c21b6be89ab065%3A0xfc92a056466aac8e!3m1!7e115!4shttps%3A%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPaMHc3aC43j4bIFpMtIb_LRnf8K5vY0CKJebBm%3Dw160-h160-k-no!5z2YXYrNmF2Lkg2YXYqNin2LHZgyDYp9mE2LfYqNmKINin2YTZhdiq2K7Y",
+                "name": "مجمع مبارك الطبي المتخصص لطب الاسنان",
+                "name:tr": "Mübarek İhtisas Tıbbi Diş Kompleksi",
+                "operator": "عيادة اسنان",
+                "operator:type": "public",
+                "phone": "+966550234360"
+            }
+        },
+        {
+            "type": "node",
+            "id": 8783651591,
+            "lat": 21.4251820,
+            "lon": 39.8233198,
+            "tags": {
+                "amenity": "drinking_water"
+            }
+        },
+        {
+            "type": "node",
+            "id": 11275483327,
+            "lat": 21.3826364,
+            "lon": 39.8814022,
+            "tags": {
+                "addr:city": "مكة",
+                "addr:street": "King Abdullah Hospital Road",
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "مستشفى الملك2"
+            }
+        },
+        {
+            "type": "node",
+            "id": 11275483328,
+            "lat": 21.3829925,
+            "lon": 39.8821049,
+            "tags": {
+                "addr:city": "مكة",
+                "addr:street": "King Abdullah Hospital Road",
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "مستشفى الملك1"
+            }
+        },
+        {
+            "type": "node",
+            "id": 11275483329,
+            "lat": 21.3823291,
+            "lon": 39.8807652,
+            "tags": {
+                "addr:city": "مكة",
+                "addr:street": "King Abdullah Hospital Road",
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "مستشفى الملك3"
+            }
+        },
+        {
+            "type": "node",
+            "id": 11275483330,
+            "lat": 21.3819354,
+            "lon": 39.8814486,
+            "tags": {
+                "addr:city": "مكة",
+                "addr:country": "SA",
+                "addr:street": "King Abdullah Hospital Road",
+                "amenity": "hospital",
+                "healthcare": "hospital",
+                "name": "مستشفى الملك4"
+            }
+        },
+        {
+            "type": "node",
+            "id": 11410017570,
+            "lat": 21.3912872,
+            "lon": 39.7627724,
+            "tags": {
+                "amenity": "hospital",
+                "name:en": "hospital turn 1"
+            }
+        },
+        {
+            "type": "node",
+            "id": 11793367734,
+            "lat": 21.4505908,
+            "lon": 39.8082788,
+            "tags": {
+                "addr:city": "مكة المكرمة",
+                "addr:housenumber": "7310",
+                "addr:postcode": "24227",
+                "addr:street": "طريق المدينة المنورة ,",
+                "amenity": "hospital",
+                "emergency": "yes",
+                "healthcare": "hospital",
+                "healthcare:speciality": "general;dentist;gynaecology;internal;dermatology;paediatrics;laboratory;home_care",
+                "image": "https://g.top4top.io/p_3017ir5fn1.jpeg",
+                "name": "مجمع الرواد الطبي العام",
+                "payment:cash": "yes",
+                "payment:credit_cards": "yes",
+                "phone": "0125448880",
+                "website": "https://heylink.me/Rowad.medical/",
+                "wheelchair": "yes"
+            }
+        },
+        {
+            "type": "node",
+            "id": 12054556416,
+            "lat": 21.2824093,
+            "lon": 39.8244284,
+            "tags": {
+                "addr:place": "ولي العهد",
+                "addr:postcode": "24352",
+                "amenity": "hospital",
+                "emergency": "yes",
+                "healthcare": "hospital",
+                "healthcare:speciality": "general",
+                "name": "المستشفى السعودي الالماني",
+                "operator": "خاص",
+                "operator:type": "business",
+                "website": "https://makkah.saudigermanhealth.com/ar"
+            }
+        }
+    ]
+}
