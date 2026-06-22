@@ -64,7 +64,8 @@ class _MedicalProfilePageState extends State<MedicalProfilePage> {
     return Directionality(
       // 3. جعل اتجاه الشاشة يمين-شمال للعربي والأوردو، وشمال-يمين لباقي اللغات
       textDirection: (LanguageService.currentLang == 'ar' ||
-              LanguageService.currentLang == 'ur')
+              LanguageService.currentLang == 'ur' ||
+              LanguageService.currentLang == 'fa')
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(

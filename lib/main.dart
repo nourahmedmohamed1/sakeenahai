@@ -149,9 +149,9 @@ class _IntroScreenState extends State<IntroScreen>
                         fontFamily: 'Cairo'),
                   ),
                   const SizedBox(height: 12),
-                  const Text(
-                    'رفيقك الآمن والمطمئن في الحج',
-                    style: TextStyle(
+                  Text(
+                    LanguageService.translate('intro_subtitle'),
+                    style: const TextStyle(
                         fontSize: 20, color: kEmerald100, fontFamily: 'Cairo'),
                   ),
                   const SizedBox(height: 60),
@@ -169,8 +169,8 @@ class _IntroScreenState extends State<IntroScreen>
                           borderRadius: BorderRadius.circular(30)),
                       elevation: 8,
                     ),
-                    child: const Text('ابدأ الرحلة',
-                        style: TextStyle(
+                    child: Text(LanguageService.translate('intro_start_btn'),
+                        style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Cairo')),
@@ -241,6 +241,13 @@ class _MainShellState extends State<MainShell> {
           {'code': 'ur', 'name': 'اردو (Urdu)'},
           {'code': 'bn', 'name': 'বাংলা (Bengali)'},
           {'code': 'tr', 'name': 'Türkçe (Turkish)'},
+          {'code': 'fr', 'name': 'Français (French)'},
+          {'code': 'id', 'name': 'Bahasa Indonesia'},
+          {'code': 'ms', 'name': 'Bahasa Melayu'},
+          {'code': 'fa', 'name': 'فارسی (Persian)'},
+          {'code': 'so', 'name': 'Soomaali (Somali)'},
+          {'code': 'ha', 'name': 'Hausa'},
+          {'code': 'sw', 'name': 'Kiswahili (Swahili)'},
         ];
 
         return Container(
@@ -309,9 +316,10 @@ class _MainShellState extends State<MainShell> {
     ];
 
     return Directionality(
-      // جعل اتجاه التطبيق متوافق مع اللغة المختارة (يمين ليسار للعربي والأوردو، وليسار يمين للباقي)
+      // RTL for Arabic, Urdu, Persian/Farsi — LTR for all others
       textDirection: (LanguageService.currentLang == 'ar' ||
-              LanguageService.currentLang == 'ur')
+              LanguageService.currentLang == 'ur' ||
+              LanguageService.currentLang == 'fa')
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
@@ -414,7 +422,7 @@ class _DashboardTabState extends State<DashboardTab>
   late AnimationController _pulseCtrl;
 
   int _healthLevel = 0; // 0=طبيعي, 1=خفيف, 2=متوسط, 3=شديد, 4=طوارئ
-  String _healthText = "مستقر وطبيعي";
+  String get _healthText => _levels[_healthLevel]["text"] as String;
   Color _healthColor = kEmerald700;
   IconData _healthIcon = Icons.favorite_rounded;
 
@@ -424,30 +432,30 @@ class _DashboardTabState extends State<DashboardTab>
   int _stumblingCount = 0;
   DateTime? _lastAlertTime;
 
-  static const _levels = [
+  List<Map<String, dynamic>> get _levels => [
     {
-      "text": "مستقر وطبيعي ✅",
+      "text": LanguageService.translate('health_level_0'),
       "color": kEmerald700,
       "icon": Icons.favorite_rounded
     },
     {
-      "text": "يُنصح بشرب الماء والراحة 💧",
-      "color": Color(0xFF2563EB),
+      "text": LanguageService.translate('health_level_1'),
+      "color": const Color(0xFF2563EB),
       "icon": Icons.water_drop_rounded
     },
     {
-      "text": "علامات إرهاق حراري 🌡️",
-      "color": Color(0xFFD97706),
+      "text": LanguageService.translate('health_level_2'),
+      "color": const Color(0xFFD97706),
       "icon": Icons.thermostat_rounded
     },
     {
-      "text": "إجهاد حراري ودوخة شديدة 🚨",
-      "color": Color(0xFFEA580C),
+      "text": LanguageService.translate('health_level_3'),
+      "color": const Color(0xFFEA580C),
       "icon": Icons.warning_amber_rounded
     },
     {
-      "text": "طوارئ: تم رصد سقوط مفاجئ ⚠️",
-      "color": Color(0xFFDC2626),
+      "text": LanguageService.translate('health_level_4'),
+      "color": const Color(0xFFDC2626),
       "icon": Icons.emergency_rounded
     },
   ];
@@ -505,7 +513,6 @@ class _DashboardTabState extends State<DashboardTab>
           _lastAlertTime = now;
           setState(() {
             _healthLevel = newLevel;
-            _healthText = _levels[newLevel]["text"] as String;
             _healthColor = _levels[newLevel]["color"] as Color;
             _healthIcon = _levels[newLevel]["icon"] as IconData;
           });
@@ -525,8 +532,9 @@ class _DashboardTabState extends State<DashboardTab>
         SakeenahCard(
           borderColor: _healthColor,
           child: Column(children: [
-            const Text('مراقبة الحالة الصحية بالذكاء الاصطناعي',
-                style: TextStyle(fontSize: 13, color: kWarmGray)),
+            Text(
+                LanguageService.translate('health_monitor_title'),
+                style: const TextStyle(fontSize: 13, color: kWarmGray)),
             const SizedBox(height: 12),
             AnimatedBuilder(
               animation: _pulseCtrl,
@@ -556,8 +564,8 @@ class _DashboardTabState extends State<DashboardTab>
                     color: _healthColor)),
             const SizedBox(height: 8),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              _miniStat('تذبذب المشية', _gaitVariability.toStringAsFixed(1)),
-              _miniStat('حالات التعثر', '$_stumblingCount'),
+              _miniStat(LanguageService.translate('gait_variability'), _gaitVariability.toStringAsFixed(1)),
+              _miniStat(LanguageService.translate('stumble_count'), '$_stumblingCount'),
             ]),
           ]),
         ),
@@ -570,10 +578,10 @@ class _DashboardTabState extends State<DashboardTab>
             Expanded(
                 child: Text(
               _healthLevel == 0
-                  ? 'أنت بخير والحمد لله. حافظ على شرب الماء باستمرار.'
+                  ? LanguageService.translate('advice_normal')
                   : _healthLevel <= 2
-                      ? 'استرح في مكان مُظلّل واشرب ماءً بارداً. لا تتعجّل.'
-                      : 'توجّه فوراً لأقرب نقطة إسعاف. اطلب المساعدة من حولك.',
+                      ? LanguageService.translate('advice_mild')
+                      : LanguageService.translate('advice_severe'),
               style: const TextStyle(fontSize: 15, color: Color(0xFF78350F)),
             )),
           ]),
@@ -728,9 +736,9 @@ class _TawafSaiTabState extends State<TawafSaiTab> {
 
   void _speakProgress() {
     // Only announce completed ritual at the LAST shawt (Shawt 7)
-    String ritualName = _isSaiMode ? 'السَّعْيِ' : 'الطَّوَافِ';
     if (_currentShawt == 7) {
-      widget.speak('مَا شَاءَ اللَّهُ! أَتْمَمْتَ $ritualName كَامِلاً.');
+      widget.speak(LanguageService.translate(
+          _isSaiMode ? 'completion_speech_sai' : 'completion_speech_tawaf'));
     }
   }
 
@@ -738,20 +746,20 @@ class _TawafSaiTabState extends State<TawafSaiTab> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('إعادة ضبط العداد',
-            style: TextStyle(fontFamily: 'Cairo', fontWeight: FontWeight.bold)),
-        content: const Text('هل أنت متأكد من إعادة ضبط العداد من البداية؟',
-            style: TextStyle(fontFamily: 'Cairo', fontSize: 16)),
+        title: Text(LanguageService.translate('reset_dialog_title'),
+            style: const TextStyle(fontFamily: 'Cairo', fontWeight: FontWeight.bold)),
+        content: Text(LanguageService.translate('reset_dialog_msg'),
+            style: const TextStyle(fontFamily: 'Cairo', fontSize: 16)),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx), child: const Text('إلغاء')),
+              onPressed: () => Navigator.pop(ctx), child: Text(LanguageService.translate('cancel_btn'))),
           TextButton(
               onPressed: () {
                 _forceReset();
                 Navigator.pop(ctx);
               },
-              child: const Text('نعم، إعادة ضبط',
-                  style: TextStyle(color: Colors.red))),
+              child: Text(LanguageService.translate('confirm_reset'),
+                  style: const TextStyle(color: Colors.red))),
         ],
       ),
     );
@@ -925,7 +933,7 @@ class _TawafSaiTabState extends State<TawafSaiTab> {
                           fontWeight: FontWeight.bold,
                           height: 1,
                           color: kEmerald900)),
-                  const Text(' / ٧', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: kWarmGray)),
+                  Text(LanguageService.currentLang == 'ar' ? ' / ٧' : ' / 7', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: kWarmGray)),
                 ],
               ),
               Text(LanguageService.translate('shawt_word'), style: TextStyle(fontSize: 14, color: kEmerald700.withValues(alpha: 0.8), fontWeight: FontWeight.bold)),
@@ -1138,6 +1146,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
   final List<Map<String, dynamic>> _aidPoints = [
     {
       "name": "مستشفى أجياد الدولي",
+      "name_key": "point_hospital_ajyad",
       "type": "مستشفى",
       "icon": Icons.local_hospital_rounded,
       "color": const Color(0xFFDC2626),
@@ -1145,6 +1154,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
     },
     {
       "name": "مستشفى الملك عبدالعزيز",
+      "name_key": "point_hospital_aziz",
       "type": "مستشفى",
       "icon": Icons.local_hospital_rounded,
       "color": const Color(0xFFDC2626),
@@ -1152,6 +1162,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
     },
     {
       "name": "مركز إسعاف المسجد الحرام",
+      "name_key": "point_ambulance_haram",
       "type": "إسعاف",
       "icon": Icons.emergency_rounded,
       "color": const Color(0xFFEA580C),
@@ -1159,6 +1170,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
     },
     {
       "name": "نقطة إسعاف الصفا",
+      "name_key": "point_ambulance_safa",
       "type": "إسعاف",
       "icon": Icons.emergency_rounded,
       "color": const Color(0xFFEA580C),
@@ -1166,6 +1178,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
     },
     {
       "name": "نقطة مياه — باب السلام",
+      "name_key": "point_water_salam",
       "type": "مياه",
       "icon": Icons.water_drop_rounded,
       "color": const Color(0xFF2563EB),
@@ -1173,6 +1186,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
     },
     {
       "name": "نقطة مياه — المسعى",
+      "name_key": "point_water_masaa",
       "type": "مياه",
       "icon": Icons.water_drop_rounded,
       "color": const Color(0xFF2563EB),
@@ -1180,6 +1194,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
     },
     {
       "name": "منطقة مظللة — أجياد",
+      "name_key": "point_shade_ajyad",
       "type": "ظل",
       "icon": Icons.park_rounded,
       "color": const Color(0xFF059669),
@@ -1187,6 +1202,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
     },
     {
       "name": "منطقة مظللة — المروة",
+      "name_key": "point_shade_marwah",
       "type": "ظل",
       "icon": Icons.park_rounded,
       "color": const Color(0xFF059669),
@@ -1247,7 +1263,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
   void _updateNav(LatLng pos) {
     final filtered = _filteredPoints();
     if (filtered.isEmpty) {
-      setState(() => _navText = "لا توجد نقاط من هذا النوع.");
+      setState(() => _navText = LanguageService.translate('no_points_type'));
       return;
     }
     double minDist = double.infinity;
@@ -1260,13 +1276,13 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
           (p["location"] as LatLng).longitude);
       if (d < minDist) {
         minDist = d;
-        nearest = p["name"];
+        nearest = LanguageService.translate(p["name_key"] as String);
       }
     }
     String distStr = minDist >= 1000
-        ? "${(minDist / 1000).toStringAsFixed(1)} كم"
-        : "${minDist.toStringAsFixed(0)} متر";
-    setState(() => _navText = "أقرب نقطة: $nearest\nالمسافة: $distStr");
+        ? "${(minDist / 1000).toStringAsFixed(1)} ${LanguageService.translate('km')}"
+        : "${minDist.toStringAsFixed(0)} ${LanguageService.translate('meter')}";
+    setState(() => _navText = "${LanguageService.translate('nearest_point')}$nearest\n${LanguageService.translate('distance')}$distStr");
   }
 
   List<Map<String, dynamic>> _filteredPoints() {
@@ -1379,7 +1395,7 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
                     onPressed: _speakNearest,
                     icon: const Icon(Icons.volume_up_rounded,
                         color: kEmerald700, size: 28),
-                    tooltip: 'قراءة صوتية',
+                    tooltip: LanguageService.translate('read_aloud_tooltip'),
                   ),
                 ]),
               ),
@@ -1397,16 +1413,16 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
                         color: Colors.white, size: 48),
                   ),
                   const SizedBox(height: 16),
-                  const Text('خريطة مكة المكرمة الأوفلاين',
-                      style: TextStyle(
+                  Text(LanguageService.translate('map_card_title'),
+                      style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: kEmerald900)),
                   const SizedBox(height: 6),
-                  const Text(
-                      'خريطة تفاعلية كاملة بدون إنترنت\nتشمل المسجد الحرام ومحيطه',
+                  Text(
+                      LanguageService.translate('map_card_subtitle'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14, color: kWarmGray, height: 1.5)),
                   const SizedBox(height: 18),
                   SizedBox(
@@ -1424,8 +1440,8 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
                             ));
                       },
                       icon: const Icon(Icons.explore_rounded, size: 26),
-                      label: const Text('افتح الخريطة',
-                          style: TextStyle(
+                      label: Text(LanguageService.translate('open_map_btn'),
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: kEmerald700,
@@ -1479,11 +1495,13 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                  Text(p["name"] as String,
+                                  Text(LanguageService.translate(p["name_key"] as String),
                                       style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold)),
-                                  Text(p["type"] as String,
+                                  Text(LanguageService.translate(p["type"] == 'مستشفى' ? 'filter_hospital' : 
+                                                                 p["type"] == 'إسعاف' ? 'filter_ambulance' : 
+                                                                 p["type"] == 'مياه' ? 'filter_water' : 'filter_shade'),
                                       style: const TextStyle(
                                           fontSize: 12, color: kWarmGray)),
                                 ])),
@@ -1557,22 +1575,21 @@ class _EmergencyTabState extends State<EmergencyTab>
 
   void _activateSOS() {
     setState(() => _sosActive = true);
-    widget.speak('تم إرسال نداء الطوارئ. جاري إبلاغ الحجاج القريبين منك.');
-    _addAlert('أنت', 'تم إرسال نداء استغاثة', isOutgoing: true);
+    widget.speak(LanguageService.translate('sos_speech_sent'));
+    _addAlert(LanguageService.translate('alert_sender_you'), LanguageService.translate('alert_msg_sent'), isOutgoing: true);
     // Notify each discovered peer (no simulated delay)
     if (_nearbyPeers.isNotEmpty) {
       Future.delayed(const Duration(seconds: 3), () {
         if (!mounted) return;
-        _addAlert('حاج قريب', 'تم استلام ندائك — المساعدة في الطريق');
-        widget.speak(
-            'تم استلام ندائك من حاج قريب. المساعدة في الطريق إن شاء الله.');
+        _addAlert(LanguageService.translate('alert_sender_peer'), LanguageService.translate('alert_msg_received'));
+        widget.speak(LanguageService.translate('sos_speech_received'));
       });
     }
   }
 
   void _cancelSOS() {
     setState(() => _sosActive = false);
-    widget.speak('تم إلغاء نداء الطوارئ.');
+    widget.speak(LanguageService.translate('sos_speech_cancelled'));
   }
 
   void _addAlert(String sender, String msg, {bool isOutgoing = false}) {
@@ -1609,16 +1626,16 @@ class _EmergencyTabState extends State<EmergencyTab>
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                  const Text('شبكة سَكينة للطوارئ',
-                      style: TextStyle(
+                  Text(LanguageService.translate('ble_network_title'),
+                      style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: kEmerald900)),
                   const SizedBox(height: 4),
                   Text(
                       _bleAvailable
-                          ? '${_nearbyPeers.length} حجاج بالقرب منك متصلون'
-                          : 'يرجى تفعيل البلوتوث لاكتشاف الحجاج',
+                          ? '${_nearbyPeers.length}${LanguageService.translate('ble_peers_connected')}'
+                          : LanguageService.translate('ble_enable_prompt'),
                       style: TextStyle(
                           fontSize: 14,
                           color: _bleAvailable
@@ -1645,8 +1662,8 @@ class _EmergencyTabState extends State<EmergencyTab>
           child: Column(children: [
             Text(
               _sosActive
-                  ? 'تم إرسال نداء الطوارئ!'
-                  : 'اضغط مطوّلاً لإرسال نداء طوارئ',
+                  ? LanguageService.translate('sos_sent_label')
+                  : LanguageService.translate('sos_hold_prompt'),
               style: TextStyle(
                   fontSize: 16,
                   color: _sosActive ? const Color(0xFFDC2626) : kWarmGray),
@@ -1706,7 +1723,7 @@ class _EmergencyTabState extends State<EmergencyTab>
                                 color: Colors.white,
                                 size: 56),
                             const SizedBox(height: 6),
-                            Text(_sosActive ? 'تم الإرسال' : 'SOS',
+                            Text(_sosActive ? LanguageService.translate('sos_sent_short') : 'SOS',
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -1723,8 +1740,8 @@ class _EmergencyTabState extends State<EmergencyTab>
                 onPressed: _cancelSOS,
                 icon:
                     const Icon(Icons.cancel_outlined, color: Color(0xFFDC2626)),
-                label: const Text('إلغاء النداء',
-                    style: TextStyle(
+                label: Text(LanguageService.translate('sos_cancel_btn'),
+                    style: const TextStyle(
                         color: Color(0xFFDC2626),
                         fontSize: 16,
                         fontWeight: FontWeight.bold)),
@@ -1733,10 +1750,10 @@ class _EmergencyTabState extends State<EmergencyTab>
             const SizedBox(height: 12),
             Text(
               _sosHolding
-                  ? 'استمر بالضغط...'
+                  ? LanguageService.translate('sos_holding')
                   : _sosActive
-                      ? 'جاري إبلاغ الحجاج القريبين'
-                      : 'اضغط مطوّلاً لمدة ثانيتين',
+                      ? LanguageService.translate('sos_notifying')
+                      : LanguageService.translate('sos_hold_seconds'),
               style: TextStyle(
                   fontSize: 13,
                   color: _sosHolding ? const Color(0xFFEA580C) : kWarmGray),
@@ -1753,7 +1770,7 @@ class _EmergencyTabState extends State<EmergencyTab>
                 const Icon(Icons.people_rounded,
                     color: kEmerald700, size: 22),
                 const SizedBox(width: 8),
-                Text('حجاج قريبون (${_nearbyPeers.length})',
+                Text('${LanguageService.translate('nearby_pilgrims')} (${_nearbyPeers.length})',
                     style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -1782,7 +1799,7 @@ class _EmergencyTabState extends State<EmergencyTab>
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold)),
                             Text(
-                                'الإشارة: ${peer.rssi} dBm',
+                                '${LanguageService.translate('signal_strength')}${peer.rssi} dBm',
                                 style: const TextStyle(
                                     fontSize: 12, color: kWarmGray)),
                           ])),
@@ -1810,11 +1827,11 @@ class _EmergencyTabState extends State<EmergencyTab>
           SakeenahCard(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Row(children: [
-                Icon(Icons.history_rounded, color: kWarmGray, size: 22),
-                SizedBox(width: 8),
-                Text('سجل التنبيهات',
-                    style: TextStyle(
+              Row(children: [
+                const Icon(Icons.history_rounded, color: kWarmGray, size: 22),
+                const SizedBox(width: 8),
+                Text(LanguageService.translate('alerts_history'),
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: kWarmGray)),
@@ -1888,7 +1905,7 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
   double _heading = 0.0;
 
   bool _isLoading = true;
-  String _loadingMsg = "جاري تهيئة الخريطة الأوفلاين...";
+  String _loadingMsg = "";
   String _errorMsg = "";
 
   MbTilesTileProvider? _tileProvider;
@@ -1919,6 +1936,7 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
   @override
   void initState() {
     super.initState();
+    _loadingMsg = LanguageService.translate('map_loading_init');
     _currentPos = widget.currentPos;
     _geoJsonRouter.loadGeoJson();
     loadServiceMarkers();
@@ -1929,14 +1947,13 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
         _currentPos.longitude > 39.7 &&
         _currentPos.longitude < 40.0) {
       _isUserInMakkah = true;
-      _mapNavText = "جاري تتبع موقعك التلقائي وحساب أقرب الخدمات...";
+      _mapNavText = LanguageService.translate('map_nav_auto_tracking');
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _calculateNearest(_currentPos);
       });
     } else {
       _isUserInMakkah = false;
-      _mapNavText =
-          "وضع المحاكاة نشط 🌐\nاضغط على أي مكان بالخريطة لتحديد موقعك الافتراضي وحساب الخدمة.";
+      _mapNavText = LanguageService.translate('map_nav_sim_mode');
     }
 
     _prepareMbtilesAndMap();
@@ -1958,7 +1975,11 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
         final tags = element['tags'] ?? {};
 
         // جلب اسم المكان (لو ملوش اسم هنسجل نوعه)
-        final String name = tags['name'] ?? tags['name:ar'] ?? "نقطة خدمة";
+        final String name = tags['name:${LanguageService.currentLang}'] ??
+                            tags['name'] ??
+                            tags['name:ar'] ??
+                            tags['name:en'] ??
+                            LanguageService.translate('default_service_point');
         final double? lat = element['lat'];
         final double? lng = element['lon']; // Overpass بيسميها lon
 
@@ -2046,37 +2067,37 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
 
     if (nearestPoint != null) {
       String distStr = minDist >= 1000
-          ? "${(minDist / 1000).toStringAsFixed(1)} كم"
-          : "${minDist.toStringAsFixed(0)} متر";
+          ? "${(minDist / 1000).toStringAsFixed(1)} ${LanguageService.translate('km')}"
+          : "${minDist.toStringAsFixed(0)} ${LanguageService.translate('meter')}";
       List<LatLng> streetPath =
           _geoJsonRouter.findRoute(pos, nearestPoint["location"] as LatLng);
       setState(() {
         _mapNavText =
-            "الموقع المحدد بنجاح 📍\nأقرب نقطة خدمية: ${nearestPoint!["name"]} وتبعد $distStr";
+            "${LanguageService.translate('map_nav_success_prefix')}${nearestPoint!["name"]}${LanguageService.translate('map_nav_distance_prefix')}$distStr";
         // تحديث إحداثيات المسار الأزرق المباشر
         _calculatedPath = streetPath;
       });
       // توجيه صوتي تفاعلي يصف للحاج كيف يتحرك
       widget.speak(
-          "تم تحديد موقعك. أقرب نقطة لك هي ${nearestPoint["name"]} والمسافة إليها تبلغ حوالي $distStr");
+          "${LanguageService.translate('map_speech_nearest_prefix')}${nearestPoint["name"]}${LanguageService.translate('map_speech_distance_prefix')}$distStr");
     }
   }
 
   Future<void> _prepareMbtilesAndMap() async {
     try {
-      setState(() => _loadingMsg = "جاري تحضير ملف الخريطة...");
+      setState(() => _loadingMsg = LanguageService.translate('map_loading_file'));
 
       final docDir = await getApplicationDocumentsDirectory();
       _destFile = File('${docDir.path}/makkah_map.mbtiles');
 
       if (!await _destFile!.exists()) {
-        setState(() => _loadingMsg = "جاري نسخ بيانات الخريطة...");
+        setState(() => _loadingMsg = LanguageService.translate('map_loading_copy'));
         final ByteData data =
             await rootBundle.load('assets/map_tiles/makkah_map.mbtiles');
         await _destFile!.writeAsBytes(data.buffer.asUint8List(), flush: true);
       }
 
-      setState(() => _loadingMsg = "جاري تهيئة محرك الخريطة...");
+      setState(() => _loadingMsg = LanguageService.translate('map_loading_engine'));
 
       final mbtiles = MbTiles(mbtilesPath: _destFile!.path);
       final provider = MbTilesTileProvider(mbtiles: mbtiles);
@@ -2137,11 +2158,15 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: (LanguageService.currentLang == 'ar' ||
+              LanguageService.currentLang == 'ur' ||
+              LanguageService.currentLang == 'fa')
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-              _isUserInMakkah ? 'خريطة مكة الأوفلاين' : 'محاكي المسار الآمن'),
+              _isUserInMakkah ? LanguageService.translate('offline_map_title_makkah') : LanguageService.translate('offline_map_title_sim')),
           backgroundColor: kEmerald700,
           foregroundColor: Colors.white,
           leading: IconButton(
@@ -2151,7 +2176,7 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
           actions: [
             IconButton(
               icon: const Icon(Icons.volume_up_rounded),
-              tooltip: 'إرشاد صوتي للمسار',
+              tooltip: LanguageService.translate('map_voice_tooltip'),
               onPressed: _speakLocation,
             ),
           ],
@@ -2231,8 +2256,8 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
                 _prepareMbtilesAndMap();
               },
               icon: const Icon(Icons.refresh_rounded),
-              label: const Text('إعادة المحاولة',
-                  style: TextStyle(fontFamily: 'Cairo')),
+              label: Text(LanguageService.translate('map_retry'),
+                  style: const TextStyle(fontFamily: 'Cairo')),
               style: ElevatedButton.styleFrom(
                 backgroundColor: kEmerald700,
                 foregroundColor: Colors.white,
