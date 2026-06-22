@@ -188,7 +188,7 @@ class _IntroScreenState extends State<IntroScreen>
 // ═══════════════════════════════════════════
 // متغيرات الموقع الوهمية (لتجربة مكة المكرمة)
 // ═══════════════════════════════════════════
-enum LocationMode { real, makkah, picked }
+enum LocationMode { real, makkah }
 LocationMode globalLocationMode = LocationMode.real;
 LatLng? globalPickedLocation;
 LatLng makkahCenter = const LatLng(21.4225, 39.8262);
@@ -1248,15 +1248,10 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
 
   void _applyLocationMode() {
     if (globalLocationMode == LocationMode.makkah) {
-      setState(() => _currentPos = makkahCenter);
+      // لو الحاج سبق واختار نقطة من الخريطة (محاكاة + تحديد يدوي معاً)
+      // نستخدمها، وإلا نستخدم مركز مكة الافتراضي
+      setState(() => _currentPos = globalPickedLocation ?? makkahCenter);
       _updateNav(_currentPos);
-    } else if (globalLocationMode == LocationMode.picked) {
-      if (globalPickedLocation != null) {
-        setState(() => _currentPos = globalPickedLocation!);
-        _updateNav(_currentPos);
-      } else {
-        setState(() => _navText = LanguageService.translate('pick_map_prompt'));
-      }
     }
   }
 
@@ -1324,16 +1319,6 @@ class _SafeRouteTabState extends State<SafeRouteTab> {
                   selectedColor: kEmerald400,
                   onSelected: (_) {
                     setState(() => globalLocationMode = LocationMode.makkah);
-                    _applyLocationMode();
-                  },
-                ),
-                const SizedBox(width: 8),
-                ChoiceChip(
-                  label: Text(LanguageService.translate('loc_picked'), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                  selected: globalLocationMode == LocationMode.picked,
-                  selectedColor: kEmerald400,
-                  onSelected: (_) {
-                    setState(() => globalLocationMode = LocationMode.picked);
                     _applyLocationMode();
                   },
                 ),
@@ -2285,7 +2270,7 @@ class _OfflineMapPageState extends State<OfflineMapPage> {
               setState(() {
                 _manualSelectedLocation = point;
                 globalPickedLocation = point;
-                globalLocationMode = LocationMode.picked;
+                globalLocationMode = LocationMode.makkah;
                 _calculateNearest(point);
               });
             },
